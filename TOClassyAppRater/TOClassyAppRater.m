@@ -32,9 +32,10 @@ NSString * const kAppRaterSearchAPIURL = @"https://itunes.apple.com/lookup?id={A
 //https://github.com/arashpayan/appirater/issues/131
 //https://github.com/arashpayan/appirater/issues/182
 
-NSString * const kAppRaterReviewURL     = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id={APPID}";
-NSString * const kAppRaterReviewURLiOS7 = @"itms-apps://itunes.apple.com/app/id{APPID}";
-NSString * const kAppRaterReviewURLiOS8 = @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id={APPID}&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software";
+NSString * const kAppRaterReviewURL      = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id={APPID}";
+NSString * const kAppRaterReviewURLiOS7  = @"itms-apps://itunes.apple.com/app/id{APPID}";
+NSString * const kAppRaterReviewURLiOS8  = @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id={APPID}&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software";
+NSString * const kAppRaterReviewURLiOS10 = @"itms-apps://itunes.apple.com/app/id{APPID}?action=write-review";
 
 NSString * const TOClassyAppRaterDidUpdateNotification = @"TOClassyAppRaterDidUpdateNotification";
 
@@ -151,9 +152,11 @@ static NSString *_localizedMessage = nil;
 
     if (systemVersion >= 7.0 && systemVersion < 7.1)
         rateURL = [kAppRaterReviewURLiOS7 stringByReplacingOccurrencesOfString:@"{APPID}" withString:_appID];
-    else if (systemVersion >= 8.0)
+    else if (systemVersion >= 8.0 && systemVersion < 10.3)
         rateURL = [kAppRaterReviewURLiOS8 stringByReplacingOccurrencesOfString:@"{APPID}" withString:_appID];
-
+    else
+        rateURL = [kAppRaterReviewURLiOS10 stringByReplacingOccurrencesOfString:@"{APPID}" withString:_appID];
+    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:rateURL]];
 #endif
 }
