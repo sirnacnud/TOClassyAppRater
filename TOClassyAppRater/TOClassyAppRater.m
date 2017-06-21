@@ -135,6 +135,11 @@ static NSString *_localizedMessage = nil;
     return ratedString;
 }
 
++ (NSNumber *)numberOfUsersRated
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:kAppRaterSettingsNumberOfRatings];
+}
+
 + (void)rateApp
 {
 #if TARGET_IPHONE_SIMULATOR

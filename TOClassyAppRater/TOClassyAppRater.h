@@ -49,6 +49,11 @@ extern NSString * const TOClassyAppRaterDidUpdateNotification;
 + (NSString *)localizedUsersRatedString;
 
 /**
+ Returns the number of users who have rated the current app.
+ */
++ (NSNumber *)numberOfUsersRated;
+
+/**
  Moves the user over to the 'Reviews' section of the specified app on the App Store.
  */
 + (void)rateApp;
